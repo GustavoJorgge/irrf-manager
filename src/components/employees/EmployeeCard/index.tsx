@@ -1,3 +1,6 @@
+
 export function EmployeeCard() {
-  return <div>Employee Card Component</div>;
+  return (
+    <h1>card</h1>
+  );
 }

@@ -1,3 +1,17 @@
+import {
+  ListContainer,
+  ListHeader,
+} from './styles';
+
+
+
 export function EmployeeList() {
-  return <div>Employee List Component</div>;
+
+  return (
+    <ListContainer>
+      <ListHeader>
+       
+      </ListHeader>
+    </ListContainer>
+  );
 }
