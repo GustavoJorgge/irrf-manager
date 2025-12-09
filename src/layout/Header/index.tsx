@@ -9,7 +9,7 @@ export function Header(){
             </IconWrapper>
             <ContentContainer>
                 <Title>Sistema de Gestão de Funcionarios</Title>
-                <Subtitle>Cálculo de IRRF - Fiscal Compliance Suite</Subtitle>  
+                <Subtitle>Cálculo de IRRF - Seidor</Subtitle>  
             </ContentContainer>
         </HeaderContainer>
     )
