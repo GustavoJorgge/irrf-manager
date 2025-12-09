@@ -13,12 +13,3 @@ export const EmployeeContainer = styled.div`
   border-radius: 10px;
   border: 1px solid ${props => props.theme['gray-200']};
 `;
-
-export const Title = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    color: ${props => props.theme['gray-800']};
-    font-size: 1.25rem;
-    font-weight: 600;
-`;

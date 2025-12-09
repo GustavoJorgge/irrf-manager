@@ -1,7 +1,8 @@
-import { EmployeeContainer, Title } from './styles';
+import { EmployeeContainer } from './styles';
 import { EmployeeSearch } from './EmployeeSearch';
 import { EmployeeList } from './EmployeeList';
 import { User } from '@phosphor-icons/react';
+import { Title } from '../ui/Title/title';
 
 
 export function Employee() {
@@ -10,11 +11,11 @@ export function Employee() {
   return (
     <EmployeeContainer>
         <div>
-            <Title>
-                <User size={24} />
-                Funcionários Cadastrados
-            </Title>
-        </div>
+  <Title variant="small">
+    <User size={24} />
+    Funcionários Cadastrados
+  </Title>
+</div>
         <div>
             <EmployeeSearch />
         </div>
