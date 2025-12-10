@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-    display: flex;
-    align-items: center;
-    color: ${(props) => props.theme['gray-600']};
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid ${(props) => props.theme['gray-200']};
+    color: ${(props) => props.theme['gray-500']};
     font-size: 0.875rem;
-    justify-content: center;
-    padding: 1rem 0;
 `;

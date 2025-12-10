@@ -7,7 +7,6 @@ import {
   HomeContent,
   LeftSection,
   RightSection,
-  HomeFooter,
 } from "./styles";
 import { Title } from '../../components/ui/Title/title';
 
@@ -33,9 +32,6 @@ export function Home(){
         </RightSection>
       </HomeContent>
 
-      <HomeFooter>
-        Teste Técnico - Sistema de Cálculo IRRF © 2024
-      </HomeFooter>
-    </HomeContainer>
+   </HomeContainer>
   );
 }
