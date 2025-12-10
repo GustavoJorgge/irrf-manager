@@ -4,8 +4,12 @@ import { useEmployee } from "../../../context/EmployeeContext";
 import { useState } from "react";
 import { EmployeeForm, type EmployeeData } from "../../../components/employees/EmployeeForm";
 
-export default function EmployeeTable() {
-  const { employees, deleteEmployee } = useEmployee();
+interface EmployeeTableProps {
+  filteredEmployees: EmployeeData[];
+}
+
+export default function EmployeeTable({ filteredEmployees }: EmployeeTableProps) {
+  const { deleteEmployee } = useEmployee();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState<EmployeeData | null>(null);
@@ -42,7 +46,7 @@ export default function EmployeeTable() {
           </Thead>
 
           <Tbody>
-            {employees.map((emp) => (
+            {filteredEmployees.map((emp) => (
               <Tr key={emp.id}>
                 <Td>{emp.name}</Td>
                 <Td>{emp.cpf}</Td>
