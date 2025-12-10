@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { UserPlus } from '@phosphor-icons/react';
 import { Employee } from "../../components/employees";
 import { IRRF } from "../../components/irrf";
+import { EmployeeForm, type EmployeeData } from "../EmployeeForm";
 import {
   HomeContainer,
   HomeHeader,
@@ -12,17 +14,29 @@ import { Title } from '../../components/ui/Title/title';
 import { Button } from '../../components/ui/Button/button';
 
 export function Home(){
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitEmployee = (employee: EmployeeData) => {
+    console.log('Novo funcionário cadastrado:', employee);
+
+  };
 
   return(
     <HomeContainer>
       <HomeHeader>
         <Title>Gestão de Funcionários</Title>
-        <Button variant="primary">
+        <Button variant="primary" onClick={handleOpenModal}>
             <UserPlus size={20} weight="regular" />
             Novo Funcionário
         </Button>
-
       </HomeHeader>
 
       <HomeContent>
@@ -34,6 +48,11 @@ export function Home(){
         </RightSection>
       </HomeContent>
 
+      <EmployeeForm
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitEmployee}
+      />
    </HomeContainer>
   );
 }

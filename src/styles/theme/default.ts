@@ -28,4 +28,13 @@ export const defaultTheme = {
   'blue-800': '#1E40AF',
   'blue-900': '#1E3A8A',
 
+  'red-50': '#FEF2F2',
+  'red-100': '#FEE2E2',
+  'red-200': '#FECACA',
+  'red-300': '#FCA5A5',
+  'red-400': '#F87171',
+  'red-500': '#EF4444',
+  'red-600': '#DC2626',
+  'red-700': '#B91C1C',
+
 } as const;
