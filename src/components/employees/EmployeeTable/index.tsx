@@ -14,7 +14,13 @@ import { useEmployee } from "../../../context/EmployeeContext";
 // }
 
 export default function EmployeeTable() {
-  const { employees } = useEmployee();
+  const { employees, deleteEmployee } = useEmployee();
+
+  const handleDelete = (id: string) => {
+    if (confirm("Tem certeza que deseja excluir este funcionário?")) {
+      deleteEmployee(id);
+    }
+  };
   return (
     <Container>
       <Table>
@@ -54,7 +60,7 @@ export default function EmployeeTable() {
                   <IconButton title="Editar" variant="primary">
                     <PencilIcon size={16} />
                   </IconButton>
-                  <IconButton title="Excluir" variant="danger">
+                  <IconButton title="Excluir" variant="danger" onClick={() => handleDelete(emp.id!)}>
                     <TrashIcon size={16} />
                   </IconButton>
                 </Actions>

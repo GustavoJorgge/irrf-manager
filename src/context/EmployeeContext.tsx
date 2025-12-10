@@ -2,8 +2,9 @@ import { createContext, useContext } from 'react';
 import { type EmployeeData } from '../pages/EmployeeForm';
 
 export interface EmployeeContextType {
-  employees: EmployeeData[];
-  addEmployee: (employee: EmployeeData) => void;
+    employees: EmployeeData[];
+    addEmployee: (employee: EmployeeData) => void;
+    deleteEmployee: (id: string) => void;
 }
 
 export const EmployeeContext = createContext<EmployeeContextType | undefined>(
