@@ -2,22 +2,13 @@ import { X } from '@phosphor-icons/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
 import { Input } from '../../components/ui/Input/input';
-import {
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  CloseButton,
-  ModalBody,
-  FormField,
-  FormLabel,
-  FormRow,
-  ModalFooter,
-  ErrorMessage,
-} from './styles';
+import {  ModalOverlay, ModalContent, ModalHeader, CloseButton, ModalBody,FormField, FormLabel, FormRow, ModalFooter, ErrorMessage,} from './styles';
 import { Title } from '../../components/ui/Title/title';
 import { Button } from '../../components/ui/Button/button';
+import { useEmployee } from '../../context/EmployeeContext';
+import { v4 as uuid } from "uuid";
+
 
 interface EmployeeFormProps {
   isOpen: boolean;
@@ -26,25 +17,25 @@ interface EmployeeFormProps {
 }
 
 const employeeSchema = z.object({
+  id: z.string().uuid().optional(),
   name: z
-    .string()
-    .min(3, 'Informe o nome completo')
-    .max(100, 'Nome muito longo'),
+    .string(),
   cpf: z
     .string()
-    .regex(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF inválido'),
-  salary: z.number().positive('Informe um salário válido'),
-  previousDiscount: z.number().min(0, 'Valor inválido'),
+    // .regex(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF inválido'),
+    .min(11, 'CPF inválido'),
+  salary: z.number(),
+  previousDiscount: z.number(),
   dependents: z
-    .number()
-    .int('Valor inválido')
-    .min(0, 'Valor inválido')
-    .max(20, 'Máximo de 20 dependentes'),
+    .number(),
 });
 
 export type EmployeeData = z.infer<typeof employeeSchema>;
 
-export function EmployeeForm({ isOpen, onClose, onSubmit }: EmployeeFormProps) {
+export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
+
+  const {addEmployee} = useEmployee();
+
   const {
     register,
     handleSubmit,
@@ -52,17 +43,11 @@ export function EmployeeForm({ isOpen, onClose, onSubmit }: EmployeeFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<EmployeeData>({
     resolver: zodResolver(employeeSchema),
-    defaultValues: {
-      name: '',
-      cpf: '',
-      salary: 0,
-      previousDiscount: 0,
-      dependents: 0,
-    },
   });
 
   function handleSave(data: EmployeeData) {
-    // onSubmit(data);
+    const newEmployee = { ...data, id: uuid() };
+    addEmployee(newEmployee);
     console.log(data)
     handleClose();
   }

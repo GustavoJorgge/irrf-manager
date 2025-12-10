@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { Title } from '../../components/ui/Title/title';
 import { Button } from '../../components/ui/Button/button';
+import { useEmployee } from '../../context/EmployeeContext';
 
 export function Home(){
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,10 +25,11 @@ export function Home(){
     setIsModalOpen(false);
   };
 
-  const handleSubmitEmployee = (employee: EmployeeData) => {
-    console.log('Novo funcionário cadastrado:', employee);
+const { addEmployee } = useEmployee();
 
-  };
+const handleSubmitEmployee = (employee: EmployeeData) => {
+  addEmployee(employee);
+};
 
   return(
     <HomeContainer>

@@ -1,31 +1,20 @@
 import { PencilIcon, TrashIcon } from "@phosphor-icons/react";
 import { Container, Table, Thead, Tbody, Tr, Th, Td, Tag, Actions, IconButton } from "./styles";
+import { useEmployee } from "../../../context/EmployeeContext";
 
-interface EmployeeProps {
-  id: string;
-  nome: string;
-  cpf: string;
-  salario: number;
-  descontoPrev: number;
-  dependentes: number;
-  aliquota: string;
-  irrf: number;
-}
-
-const mockEmployees: EmployeeProps[] = [
-  {
-    id: "1",
-    nome: "Gustavo Jorge",
-    cpf: "154.417.166-81",
-    salario: 4000,
-    descontoPrev: 200,
-    dependentes: 1,
-    aliquota: "15%",
-    irrf: 160.12,
-  },
-];
+// interface EmployeeProps {
+//   id: string;
+//   nome: string;
+//   cpf: string;
+//   salario: number;
+//   previousDiscount: number;
+//   dependents: number;
+//   aliquot: string;
+//   irrf: number;
+// }
 
 export default function EmployeeTable() {
+  const { employees } = useEmployee();
   return (
     <Container>
       <Table>
@@ -43,31 +32,21 @@ export default function EmployeeTable() {
         </Thead>
 
         <Tbody>
-          {mockEmployees.map((emp) => (
+          {employees.map((emp) => (
             <Tr key={emp.id}>
-              <Td>{emp.nome}</Td>
+              <Td>{emp.name}</Td>
               <Td>{emp.cpf}</Td>
               <Td>
-                {emp.salario.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
+                {emp.salary} </Td>
+              <Td>
+                {emp.previousDiscount}
+              </Td>
+              <Td>{emp.dependents}</Td>
+              <Td>
+                <Tag>15</Tag>
               </Td>
               <Td>
-                {emp.descontoPrev.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </Td>
-              <Td>{emp.dependentes}</Td>
-              <Td>
-                <Tag>{emp.aliquota}</Tag>
-              </Td>
-              <Td>
-                {emp.irrf.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
+                R$40
               </Td>
 
               <Td>
