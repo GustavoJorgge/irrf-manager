@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 import { useEmployee } from '../../context/EmployeeContext';
-import { calculateIRRF } from "../../utils/calculateIRRF";
+import { useIRRF } from '../../hooks/useIRRF';
 
 const employeeSchema = z.object({
   id: z.string().uuid().optional(),
@@ -29,6 +29,7 @@ const employeeSchema = z.object({
   baseSalary: z.number().optional(),
   irrf: z.number().optional(),
   netSalary: z.number().optional(),
+  aliquot: z.number().optional(),
 });
 
 export type EmployeeData = z.infer<typeof employeeSchema>;
@@ -42,6 +43,7 @@ interface EmployeeFormProps {
 
 
 export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormProps) {
+  const { calculate } = useIRRF();
   const { addEmployee, updateEmployee } = useEmployee();
 
   const {
@@ -60,8 +62,8 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
   }, [employeeToEdit, reset]);
 
 
-  function handleSave(data: EmployeeData) {
-    const { baseSalary, irrf, netSalary } = calculateIRRF(
+   function handleSave(data: EmployeeData) {
+    const result = calculate(
       data.salary,
       data.previousDiscount,
       data.dependents
@@ -69,9 +71,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
 
     const finalData: EmployeeData = {
       ...data,
-      baseSalary,
-      irrf,
-      netSalary,
+      ...result,
     };
 
     if (employeeToEdit) {

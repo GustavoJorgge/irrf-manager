@@ -16,8 +16,8 @@ export default function EmployeeTable() {
   };
 
   const handleUpdate = (emp: EmployeeData) => {
-    setEmployeeToEdit(emp);   // define quem vamos editar
-    setIsModalOpen(true);     // abre o modal
+    setEmployeeToEdit(emp); 
+    setIsModalOpen(true);     
   };
 
   const handleCloseModal = () => {
@@ -50,7 +50,7 @@ export default function EmployeeTable() {
                 <Td>R$ {emp.netSalary?.toFixed(2)}</Td>
                 <Td>{emp.previousDiscount}</Td>
                 <Td>{emp.dependents}</Td>
-                <Td><Tag>{((emp.irrf ?? 0) / (emp.baseSalary ?? 1) * 100).toFixed(2)}%</Tag></Td>
+                <Td><Tag>{(emp.aliquot! * 100).toFixed(1)}%</Tag></Td>
                 <Td>R$ {emp.irrf?.toFixed(2)}</Td>
 
                 <Td>
