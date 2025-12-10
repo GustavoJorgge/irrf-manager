@@ -9,6 +9,7 @@ import {
   RightSection,
 } from "./styles";
 import { Title } from '../../components/ui/Title/title';
+import { Button } from '../../components/ui/Button/button';
 
 export function Home(){
 
@@ -17,10 +18,11 @@ export function Home(){
     <HomeContainer>
       <HomeHeader>
         <Title>Gestão de Funcionários</Title>
-        <button>
-          <UserPlus size={20} weight="regular" />
-          Novo Funcionário
-        </button>
+        <Button variant="primary">
+            <UserPlus size={20} weight="regular" />
+            Novo Funcionário
+        </Button>
+
       </HomeHeader>
 
       <HomeContent>
