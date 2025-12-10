@@ -3,38 +3,36 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Input } from '../../components/ui/Input/input';
-import {  ModalOverlay, ModalContent, ModalHeader, CloseButton, ModalBody,FormField, FormLabel, FormRow, ModalFooter, ErrorMessage,} from './styles';
+import {  
+  ModalOverlay, ModalContent, ModalHeader, CloseButton,
+  ModalBody, FormField, FormLabel, FormRow, ModalFooter, ErrorMessage,
+} from './styles';
 import { Title } from '../../components/ui/Title/title';
 import { Button } from '../../components/ui/Button/button';
 import { useEmployee } from '../../context/EmployeeContext';
 import { v4 as uuid } from "uuid";
-
+import { useEffect } from 'react';
 
 interface EmployeeFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: EmployeeData) => void;
+  employeeToEdit?: EmployeeData | null;
+  onSubmit?: (employee: EmployeeData) => void;
 }
 
 const employeeSchema = z.object({
   id: z.string().uuid().optional(),
-  name: z
-    .string(),
-  cpf: z
-    .string()
-    // .regex(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF inválido'),
-    .min(11, 'CPF inválido'),
+  name: z.string(),
+  cpf: z.string().min(11, 'CPF inválido'),
   salary: z.number(),
   previousDiscount: z.number(),
-  dependents: z
-    .number(),
+  dependents: z.number(),
 });
 
 export type EmployeeData = z.infer<typeof employeeSchema>;
 
-export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
-
-  const {addEmployee} = useEmployee();
+export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormProps) {
+  const { addEmployee, updateEmployee } = useEmployee();
 
   const {
     register,
@@ -45,10 +43,22 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
     resolver: zodResolver(employeeSchema),
   });
 
+  useEffect(() => {
+    if (employeeToEdit) {
+      reset(employeeToEdit);
+    } else {
+      reset();
+    }
+  }, [employeeToEdit, reset]);
+
   function handleSave(data: EmployeeData) {
-    const newEmployee = { ...data, id: uuid() };
-    addEmployee(newEmployee);
-    console.log(data)
+    if (employeeToEdit) {
+      updateEmployee(data); 
+    } else {
+      const newEmployee = { ...data, id: uuid() };
+      addEmployee(newEmployee);
+    }
+
     handleClose();
   }
 
@@ -63,7 +73,9 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
     <ModalOverlay onClick={handleClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
-          <Title>Cadastrar Funcionário</Title>
+          <Title>
+            {employeeToEdit ? "Editar Funcionário" : "Cadastrar Funcionário"}
+          </Title>
 
           <CloseButton onClick={handleClose}>
             <X size={24} weight="regular" />
@@ -98,25 +110,23 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
               <FormField>
                 <FormLabel>Salário Bruto (R$)</FormLabel>
                 <Input
-                    type="number"
-                    step="0.01"
-                    placeholder="5000.00"
-                    hasError={!!errors.salary}
-                    {...register('salary', { valueAsNumber: true })}
+                  type="number"
+                  step="0.01"
+                  placeholder="5000.00"
+                  hasError={!!errors.salary}
+                  {...register('salary', { valueAsNumber: true })}
                 />
-                {errors.salary && (
-                    <ErrorMessage>{errors.salary.message}</ErrorMessage>
-                )}
+                {errors.salary && <ErrorMessage>{errors.salary.message}</ErrorMessage>}
               </FormField>
 
               <FormField>
                 <FormLabel>Desconto Previdência (R$)</FormLabel>
                 <Input
-                    type="number"
-                    step="0.01"
-                    placeholder="550.00"
-                    hasError={!!errors.previousDiscount}
-                    {...register('previousDiscount', { valueAsNumber: true })}
+                  type="number"
+                  step="0.01"
+                  placeholder="550.00"
+                  hasError={!!errors.previousDiscount}
+                  {...register('previousDiscount', { valueAsNumber: true })}
                 />
                 {errors.previousDiscount && (
                   <ErrorMessage>{errors.previousDiscount.message}</ErrorMessage>
@@ -125,7 +135,7 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
             </FormRow>
 
             <FormField>
-              <FormLabel>Nº de Dependentes</FormLabel>
+              <FormLabel>Nº Dependentes</FormLabel>
               <Input
                 type="number"
                 min="0"
@@ -133,9 +143,7 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
                 hasError={!!errors.dependents}
                 {...register('dependents', { valueAsNumber: true })}
               />
-              {errors.dependents && (
-                <ErrorMessage>{errors.dependents.message}</ErrorMessage>
-              )}
+              {errors.dependents && <ErrorMessage>{errors.dependents.message}</ErrorMessage>}
             </FormField>
           </ModalBody>
 
@@ -145,7 +153,9 @@ export function EmployeeForm({ isOpen, onClose }: EmployeeFormProps) {
             </Button>
 
             <Button type="submit" variant="secundary" disabled={isSubmitting}>
-              {isSubmitting ? 'Cadastrando...' : 'Cadastrar'}
+              {employeeToEdit
+                ? isSubmitting ? "Salvando..." : "Salvar Alterações"
+                : isSubmitting ? "Cadastrando..." : "Cadastrar"}
             </Button>
           </ModalFooter>
         </form>

@@ -13,10 +13,17 @@ export function EmployeeProvider({ children }: { children: ReactNode }) {
     setEmployees(prev => prev.filter(emp => emp.id !== id));
   };
 
+  const updateEmployee = (updatedEmployee: EmployeeData) => {
+    setEmployees(prev =>
+      prev.map(emp => (emp.id === updatedEmployee.id ? updatedEmployee : emp))
+    );
+  }
+
   const value: EmployeeContextType = {
     employees,
     addEmployee,
     deleteEmployee,
+    updateEmployee,
   };
 
   return (
