@@ -4,15 +4,14 @@ export const EmployeeContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr auto;
     grid-row-gap: 1.5rem;
-    gap: 2rem;
+    gap: 0.5rem;
     align-items: center;
     justify-content: space-between;
     
     width: 100%;
-    max-width: 50rem;
     padding: 1.5rem;
     
-    background-color: ${props => props.theme['background']};
+    background-color: ${props => props.theme['gray-50']};
     border: 1px solid ${props => props.theme['gray-200']};
     border-radius: 10px;
     
