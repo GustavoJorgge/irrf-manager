@@ -37,7 +37,7 @@ export default function EmployeeTable() {
               <Td>{emp.name}</Td>
               <Td>{emp.cpf}</Td>
               <Td>
-                {emp.salary} </Td>
+                R$ {emp.salary} </Td>
               <Td>
                 {emp.previousDiscount}
               </Td>
@@ -51,10 +51,10 @@ export default function EmployeeTable() {
 
               <Td>
                 <Actions>
-                  <IconButton title="Editar">
+                  <IconButton title="Editar" variant="primary">
                     <PencilIcon size={16} />
                   </IconButton>
-                  <IconButton title="Excluir">
+                  <IconButton title="Excluir" variant="danger">
                     <TrashIcon size={16} />
                   </IconButton>
                 </Actions>

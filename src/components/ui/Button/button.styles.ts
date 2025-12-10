@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export type ButtonVariant = "primary" | "secundary";
+export type ButtonVariant = "primary" | "secundary" | "danger";
 
 interface ButtonContainerProps {
   variant: ButtonVariant;
@@ -22,6 +22,7 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     const colors = {
         primary: theme["gray-500"],
         secundary: theme["blue-800"],
+        danger: theme["red-600"],
     };
 
     return css`

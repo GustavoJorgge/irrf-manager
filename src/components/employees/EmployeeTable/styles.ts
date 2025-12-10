@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export type IconVariant = 'primary' | 'danger';
+
+interface IconButtonProps {
+  variant?: IconVariant;
+}
+
 
 export const Container = styled.div`
 width: 100%;
@@ -38,6 +44,7 @@ white-space: nowrap;
 export const Tr = styled.tr`
 overflow: hidden;
 text-overflow: ellipsis;
+text-align: center;
 white-space: nowrap;
 &:hover {
 background-color: ${props => props.theme['gray-200']};
@@ -64,7 +71,7 @@ font-size: 12px;
 `;
 
 
-export const IconButton = styled.button`
+export const IconButton = styled.button<IconButtonProps>`
 background: none;
 border: none;
 cursor: pointer;
@@ -74,7 +81,7 @@ margin-right: 8px;
 svg {
 width: 18px;
 height: 18px;
-color: ${props => props.theme['gray-600']};
+color: ${props => props.variant === 'danger' ? props.theme['red-600'] : props.theme['gray-600']};
 }
 
 &:hover svg {
