@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { UserPlus } from '@phosphor-icons/react';
-import { Employee } from "../../components/employees";
+import { Employee } from "../Employees";
 import { IRRF } from "../../components/irrf";
-import { EmployeeForm, type EmployeeData } from "../EmployeeForm";
+import { EmployeeForm, type EmployeeData } from "../../components/employees/EmployeeForm";
 import {
   HomeContainer,
   HomeHeader,

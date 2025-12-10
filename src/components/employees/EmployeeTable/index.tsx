@@ -2,8 +2,7 @@ import { PencilIcon, TrashIcon } from "@phosphor-icons/react";
 import { Container, Table, Thead, Tbody, Tr, Th, Td, Tag, Actions, IconButton } from "./styles";
 import { useEmployee } from "../../../context/EmployeeContext";
 import { useState } from "react";
-import { EmployeeForm } from "../../../pages/EmployeeForm";
-import type { EmployeeData } from "../../../pages/EmployeeForm";
+import { EmployeeForm, type EmployeeData } from "../../../components/employees/EmployeeForm";
 
 export default function EmployeeTable() {
   const { employees, deleteEmployee } = useEmployee();

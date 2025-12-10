@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { EmployeeContext, type EmployeeContextType } from './EmployeeContext';
-import { type EmployeeData } from '../pages/EmployeeForm';
+import { type EmployeeData } from '../components/employees/EmployeeForm';
 
 export function EmployeeProvider({ children }: { children: ReactNode }) {
   const [employees, setEmployees] = useState<EmployeeData[]>([]);

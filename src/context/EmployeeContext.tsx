@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { type EmployeeData } from '../pages/EmployeeForm';
+import { type EmployeeData } from '../components/employees/EmployeeForm';
 
 export interface EmployeeContextType {
     employees: EmployeeData[];

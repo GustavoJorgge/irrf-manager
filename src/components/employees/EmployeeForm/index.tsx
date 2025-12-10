@@ -5,17 +5,17 @@ import { z } from 'zod';
 import { useEffect } from 'react';
 import { v4 as uuid } from "uuid";
 
-import { Input } from '../../components/ui/Input/input';
-import { Title } from '../../components/ui/Title/title';
-import { Button } from '../../components/ui/Button/button';
+import { Input } from '../../ui/Input/input';
+import { Title } from '../../ui/Title/title';
+import { Button } from '../../ui/Button/button';
 
 import {  
   ModalOverlay, ModalContent, ModalHeader, CloseButton,
   ModalBody, FormField, FormLabel, FormRow, ModalFooter, ErrorMessage,
 } from './styles';
 
-import { useEmployee } from '../../context/EmployeeContext';
-import { useIRRF } from '../../hooks/useIRRF';
+import { useEmployee } from '../../../context/EmployeeContext';
+import { useIRRF } from '../../../hooks/useIRRF';
 
 const employeeSchema = z.object({
   id: z.string().uuid().optional(),

@@ -1,8 +1,8 @@
 import { Dot, DotContent, EmployeeContainer } from './styles';
-import { EmployeeSearch } from './EmployeeSearch';
+import { EmployeeSearch } from '../../components/employees/EmployeeSearch';
 import { User } from '@phosphor-icons/react';
-import { Title } from '../ui/Title/title';
-import EmployeeTable from './EmployeeTable';
+import { Title } from '../../components/ui/Title/title';
+import EmployeeTable from '../../components/employees/EmployeeTable';
 
 
 export function Employee() {
