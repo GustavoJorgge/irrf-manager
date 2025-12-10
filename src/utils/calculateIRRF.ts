@@ -1,37 +1,55 @@
+interface IRRFResult {
+  baseSalary: number;
+  irrf: number;
+  netSalary: number;
+  aliquot: number;
+}
+
 export function calculateIRRF(
   salary: number,
-  inss: number,
+  previdencia: number,
   dependents: number
-) {
-  const deductionPorDependent = 189.59;
+): IRRFResult {
 
-  const salaryBase =
-    salary - inss - dependents * deductionPorDependent;
+  const DEPENDENT_DEDUCTION = 189.59;
 
-  let aliquota = 0;
-  let parcela = 0;
+  const baseSalary =
+    salary -
+    previdencia -
+    dependents * DEPENDENT_DEDUCTION;
 
-  if (salaryBase <= 2259.20) {
-    aliquota = 0;
-    parcela = 0;
-  } else if (salaryBase <= 2826.65) {
-    aliquota = 0.075;
-    parcela = 169.44;
-  } else if (salaryBase <= 3751.05) {
-    aliquota = 0.15;
-    parcela = 381.44;
-  } else if (salaryBase <= 4664.68) {
-    aliquota = 0.225;
-    parcela = 662.77;
-  } else {
-    aliquota = 0.275;
-    parcela = 896;
+  let aliquot = 0;
+  let deduction = 0;
+
+  if (baseSalary <= 2259.20) {
+    aliquot = 0;
+    deduction = 0;
+  } 
+  else if (baseSalary >= 2259.21 && baseSalary <= 2826.65) {
+    aliquot = 0.075;
+    deduction = 169.44;
+  } 
+  else if (baseSalary >= 2826.66 && baseSalary <= 3751.05) {
+    aliquot = 0.15;
+    deduction = 381.44;
+  } 
+  else if (baseSalary >= 3751.06 && baseSalary <= 4664.68) {
+    aliquot = 0.225;
+    deduction = 662.77;
+  } 
+  else {
+    aliquot = 0.275;
+    deduction = 896.0;
   }
 
-  const irrf = salaryBase * aliquota - parcela;
+  const irrf = Math.max(0, baseSalary * aliquot - deduction);
+
+  const netSalary = salary - previdencia - irrf;
 
   return {
-    salaryBase: Math.max(salaryBase, 0),
-    irrf: Math.max(irrf, 0),
+    baseSalary,
+    irrf,
+    netSalary,
+    aliquot,
   };
 }

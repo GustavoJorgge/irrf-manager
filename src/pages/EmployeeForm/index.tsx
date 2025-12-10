@@ -2,16 +2,36 @@ import { X } from '@phosphor-icons/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useEffect } from 'react';
+import { v4 as uuid } from "uuid";
+
 import { Input } from '../../components/ui/Input/input';
+import { Title } from '../../components/ui/Title/title';
+import { Button } from '../../components/ui/Button/button';
+
 import {  
   ModalOverlay, ModalContent, ModalHeader, CloseButton,
   ModalBody, FormField, FormLabel, FormRow, ModalFooter, ErrorMessage,
 } from './styles';
-import { Title } from '../../components/ui/Title/title';
-import { Button } from '../../components/ui/Button/button';
+
 import { useEmployee } from '../../context/EmployeeContext';
-import { v4 as uuid } from "uuid";
-import { useEffect } from 'react';
+import { calculateIRRF } from "../../utils/calculateIRRF";
+
+const employeeSchema = z.object({
+  id: z.string().uuid().optional(),
+
+  name: z.string().min(3, "Nome é obrigatório"),
+  cpf: z.string().min(11, "CPF inválido"),
+  salary: z.number().min(0, "Informe um salário válido"),
+  previousDiscount: z.number().min(0, "Informe um desconto válido"),
+  dependents: z.number().min(0, "Informe a quantidade de dependentes"),
+
+  baseSalary: z.number().optional(),
+  irrf: z.number().optional(),
+  netSalary: z.number().optional(),
+});
+
+export type EmployeeData = z.infer<typeof employeeSchema>;
 
 interface EmployeeFormProps {
   isOpen: boolean;
@@ -20,16 +40,6 @@ interface EmployeeFormProps {
   onSubmit?: (employee: EmployeeData) => void;
 }
 
-const employeeSchema = z.object({
-  id: z.string().uuid().optional(),
-  name: z.string(),
-  cpf: z.string().min(11, 'CPF inválido'),
-  salary: z.number(),
-  previousDiscount: z.number(),
-  dependents: z.number(),
-});
-
-export type EmployeeData = z.infer<typeof employeeSchema>;
 
 export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormProps) {
   const { addEmployee, updateEmployee } = useEmployee();
@@ -41,22 +51,33 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
     formState: { errors, isSubmitting },
   } = useForm<EmployeeData>({
     resolver: zodResolver(employeeSchema),
+    defaultValues: employeeToEdit ?? {},
   });
 
+
   useEffect(() => {
-    if (employeeToEdit) {
-      reset(employeeToEdit);
-    } else {
-      reset();
-    }
+    reset(employeeToEdit ?? {});
   }, [employeeToEdit, reset]);
 
+
   function handleSave(data: EmployeeData) {
+    const { baseSalary, irrf, netSalary } = calculateIRRF(
+      data.salary,
+      data.previousDiscount,
+      data.dependents
+    );
+
+    const finalData: EmployeeData = {
+      ...data,
+      baseSalary,
+      irrf,
+      netSalary,
+    };
+
     if (employeeToEdit) {
-      updateEmployee(data); 
+      updateEmployee(finalData);
     } else {
-      const newEmployee = { ...data, id: uuid() };
-      addEmployee(newEmployee);
+      addEmployee({ ...finalData, id: uuid() });
     }
 
     handleClose();
@@ -68,6 +89,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
   }
 
   if (!isOpen) return null;
+
 
   return (
     <ModalOverlay onClick={handleClose}>
@@ -84,6 +106,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
 
         <form onSubmit={handleSubmit(handleSave)}>
           <ModalBody>
+
             <FormField>
               <FormLabel>Nome Completo</FormLabel>
               <Input
@@ -108,7 +131,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
 
             <FormRow>
               <FormField>
-                <FormLabel>Salário Bruto (R$)</FormLabel>
+                <FormLabel>Salário Bruto</FormLabel>
                 <Input
                   type="number"
                   step="0.01"
@@ -120,7 +143,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
               </FormField>
 
               <FormField>
-                <FormLabel>Desconto Previdência (R$)</FormLabel>
+                <FormLabel>Desconto Previdência</FormLabel>
                 <Input
                   type="number"
                   step="0.01"
@@ -145,6 +168,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
               />
               {errors.dependents && <ErrorMessage>{errors.dependents.message}</ErrorMessage>}
             </FormField>
+
           </ModalBody>
 
           <ModalFooter>
@@ -154,8 +178,8 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
 
             <Button type="submit" variant="secundary" disabled={isSubmitting}>
               {employeeToEdit
-                ? isSubmitting ? "Salvando..." : "Salvar Alterações"
-                : isSubmitting ? "Cadastrando..." : "Cadastrar"}
+                ? (isSubmitting ? "Salvando..." : "Salvar Alterações")
+                : (isSubmitting ? "Cadastrando..." : "Cadastrar")}
             </Button>
           </ModalFooter>
         </form>

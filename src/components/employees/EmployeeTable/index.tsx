@@ -47,11 +47,11 @@ export default function EmployeeTable() {
               <Tr key={emp.id}>
                 <Td>{emp.name}</Td>
                 <Td>{emp.cpf}</Td>
-                <Td>R$ {emp.salary}</Td>
+                <Td>R$ {emp.netSalary?.toFixed(2)}</Td>
                 <Td>{emp.previousDiscount}</Td>
                 <Td>{emp.dependents}</Td>
-                <Td><Tag>15</Tag></Td>
-                <Td>R$ 40</Td>
+                <Td><Tag>{((emp.irrf ?? 0) / (emp.baseSalary ?? 1) * 100).toFixed(2)}%</Tag></Td>
+                <Td>R$ {emp.irrf?.toFixed(2)}</Td>
 
                 <Td>
                   <Actions>
