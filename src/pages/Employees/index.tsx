@@ -31,7 +31,8 @@ export function Employee() {
             <EmployeeSearch onSearch={setSearchQuery} />
         </div>
       <EmployeeTable filteredEmployees={filteredEmployees} />
-      Total: R$1400
+        Total de IRRF Retido:
+        R$ {filteredEmployees.reduce((total, emp) => total + (emp.irrf || 0), 0).toFixed(2)}
     </EmployeeContainer>
   );
 }
