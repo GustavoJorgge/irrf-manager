@@ -7,6 +7,7 @@ export const HomeContainer = styled.div`
     padding: 2rem;
     background-color: ${(props) => props.theme['background']};
     gap: 1rem;
+    width: 100%;
 
     @media (max-width: 768px) {
         padding: 1.5rem;

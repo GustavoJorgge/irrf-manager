@@ -10,10 +10,8 @@ export const Container = styled.div`
   width: 100%;
   margin: 20px auto;
   border-radius: 12px;
-  overflow-x: auto; /* Permite scroll no mobile */
+  overflow-x: auto; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-
-  /* Remove barra visual no desktop */
   scrollbar-width: thin;
 
   @media (max-width: 768px) {
@@ -25,7 +23,7 @@ export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   font-family: "Inter", sans-serif;
-  min-width: 600px; /* evita quebrar demais no mobile */
+  min-width: 600px;
 `;
 
 export const Thead = styled.thead`
