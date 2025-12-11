@@ -9,6 +9,10 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   z-index: 50;
   padding: 1rem;
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -19,6 +23,11 @@ export const ModalContent = styled.div`
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    max-height: 95vh;
+    border-radius: 8px;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -27,6 +36,10 @@ export const ModalHeader = styled.div`
   align-items: center;
   padding: 1.5rem;
   border-bottom: 1px solid ${props => props.theme['gray-200']};
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -45,6 +58,10 @@ export const CloseButton = styled.button`
     background-color: ${props => props.theme['gray-100']};
     color: ${props => props.theme['gray-900']};
   }
+
+  @media (max-width: 480px) {
+    padding: 0.375rem;
+  }
 `;
 
 export const ModalBody = styled.div`
@@ -52,6 +69,11 @@ export const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
 `;
 
 export const FormField = styled.div`
@@ -64,12 +86,20 @@ export const FormLabel = styled.label`
   font-size: 0.925rem;
   font-weight: 600;
   color: ${props => props.theme.black};
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const ErrorMessage = styled.span`
   font-size: 0.75rem;
   color: ${props => props.theme['red-500']};
   margin-top: 0.25rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.688rem;
+  }
 `;
 
 export const FormRow = styled.div`
@@ -80,6 +110,10 @@ export const FormRow = styled.div`
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
 `;
 
 export const ModalFooter = styled.div`
@@ -88,4 +122,14 @@ export const ModalFooter = styled.div`
   gap: 1rem;
   padding: 1.5rem;
   border-top: 1px solid ${props => props.theme['gray-200']};
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 0.75rem;
+    flex-direction: column-reverse;
+    
+    button {
+      width: 100%;
+    }
+  }
 `;

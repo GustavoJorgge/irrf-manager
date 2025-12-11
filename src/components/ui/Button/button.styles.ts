@@ -34,6 +34,16 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     cursor: pointer;
     background-color: ${({ theme, variant }) =>
       variant === "primary" ? theme["gray-600"] : theme["blue-900"]};   
-}
+  }
 
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    gap: 0.375rem;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 `;

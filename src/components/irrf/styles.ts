@@ -8,6 +8,12 @@ export const IRRFContainer = styled.div`
     background-color: ${props => props.theme['gray-50']};
     border-radius: 8px;
     border: 1px solid ${props => props.theme['gray-200']};
+    box-sizing: border-box;
+
+    @media (max-width: 480px) {
+        padding: 1rem;
+        gap: 0.875rem;
+    }
 `;
 
 export const IRRFHeader = styled.div`
@@ -15,6 +21,11 @@ export const IRRFHeader = styled.div`
     gap: 0.5rem;
     align-items: center;
     margin-bottom: 0.5rem;
+
+    @media (max-width: 480px) {
+        gap: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
 `;
 
 export const IRRFTitle = styled.h2`
@@ -22,11 +33,23 @@ export const IRRFTitle = styled.h2`
     font-size: 1.125rem;
     font-weight: 600;
     color: ${props => props.theme['gray-900']};
+
+    @media (max-width: 480px) {
+        font-size: 1rem;
+    }
+`;
+
+export const TableWrapper = styled.div`
+    overflow-x: auto; 
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
 `;
 
 export const Table = styled.table`
-    width: 100%;
     border-collapse: collapse;
+
+    table-layout: auto;
 `;
 
 export const TableHead = styled.thead`
@@ -50,18 +73,28 @@ export const TableHeader = styled.th`
     font-weight: 600;
     color: ${props => props.theme['gray-500']};
     text-transform: uppercase;
+
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+
+    @media (max-width: 480px) {
+        font-size: 0.68rem;
+        padding: 0.45rem;
+    }
 `;
 
 export const TableCell = styled.td`
     padding: 0.75rem;
     font-size: 0.875rem;
     color: ${props => props.theme['black']};
+    vertical-align: top;
 
-    &:nth-child(2) {
-        font-weight: 600;
-    }
-    &:last-child {
-        color: ${props => props.theme['gray-700']};
+    word-break: break-word;
+
+    @media (max-width: 480px) {
+        padding: 0.45rem;
+        font-size: 0.75rem;
     }
 `;
 
@@ -73,5 +106,9 @@ export const Footer = styled.div`
     & > span {
         font-weight: bold;
         color: ${props => props.theme['gray-900']};
+    }
+
+    @media (max-width: 480px) {
+        font-size: 0.75rem;
     }
 `;
