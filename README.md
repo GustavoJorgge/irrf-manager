@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# Gerenciamento de Funcionários e Cálculo de IRRF
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
+Este projeto foi desenvolvido para facilitar o calculo de IRRF por funcionario. 
 
-Currently, two official plugins are available:
+## Funcionalidades
+- **Cadastrar, atualizar e excluir funcionários**: Interface amigável para adicionar, editar e remover registros de funcionários de forma eficiente e rápida.
+- **Listar funcionários com informações detalhadas**: Visualização completa das informações dos funcionários: Nome, CPF, Salario, Dosconto, Dependentes, Desconto IRPF.
+- **Filtrar funcionários por nome e CPF**: Mecanismo de filtro que permite localizar funcionários específicos rapidamente por Nome ou CPF.
+- **Cálculo automático de salário base e desconto de IRRF**: Hook performatico para calcular o IRRF de forma automatica no momento do cadastro ou edição.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas
+- **React.js com VITE**
+- **Context**
+- **TypeScript**
+- **Vitest** Teste da Aplicação
+- **Zod** Validação de dados
+- **React Hook Form**
+- **Styled Components**
+- **Phosphor-icons**
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Instalação
+Para instalar as dependências e executar a aplicação, siga os passos abaixo:
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/GustavoJorgge/irrf-manager.git
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd irrf-manager
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Inicie a aplicação:
+   ```bash
+   npm run dev
+   ```
+5. Testes via terminal:
+```bash
+npm run test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Após isso, a aplicação estará disponível em `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Instruções de Uso
+Para testar a aplicação, você pode realizar as seguintes ações:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Acesse a interface inicial da aplicação.
+2. Utilize os formulários de entrada para cadastrar novos funcionários.
+3. Experimente as opções de atualização e exclusão para modificar os dados de funcionários existentes.
+4. Utilize a barra de filtro para encontrar rapidamente um funcionário específico por nome ou CPF.
+5. Verifique o cálculo automático do IRRF ao atualizar ou cadastrar salários.
+
