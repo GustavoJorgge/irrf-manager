@@ -3,7 +3,7 @@ import { EmployeeProvider } from "./EmployeeProvider";
 import { describe, it, expect } from "vitest";
 import { useEmployee } from "./EmployeeContext";
 
-describe("EmployeeContext", () => {
+describe("Teste EmployeeContext", () => {
   it("Preenche formulario e adiciona um funcionário corretamente", () => {
     const { result } = renderHook(() => useEmployee(), {
       wrapper: EmployeeProvider,

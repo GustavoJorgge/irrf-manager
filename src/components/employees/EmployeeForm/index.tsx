@@ -124,6 +124,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
                 type="text"
                 placeholder="000.000.000-00"
                 hasError={!!errors.cpf}
+                maxLength={14}
                 {...register('cpf')}
               />
               {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
@@ -134,7 +135,7 @@ export function EmployeeForm({ isOpen, onClose, employeeToEdit }: EmployeeFormPr
                 <FormLabel>Salário Bruto</FormLabel>
                 <Input
                   type="number"
-                  step="0.01"
+                  step="1"
                   placeholder="5000.00"
                   hasError={!!errors.salary}
                   {...register('salary', { valueAsNumber: true })}
