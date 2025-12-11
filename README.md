@@ -53,3 +53,7 @@ Para testar a aplicação, você pode realizar as seguintes ações:
 4. Utilize a barra de filtro para encontrar rapidamente um funcionário específico por nome ou CPF.
 5. Verifique o cálculo automático do IRRF ao atualizar ou cadastrar salários.
 
+## Planos futuros
+- Ampliar a cobertura de testes, incluindo novos cenários que considerem funcionalidades adicionais e validação de renderização.
+- Implementar integração com a API da Reforma Tributária, expandindo a capacidade de cálculo e simulação de impostos.
+
