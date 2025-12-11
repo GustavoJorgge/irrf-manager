@@ -75,7 +75,8 @@ export const Td = styled.td`
 export const Tag = styled.span`
   padding: 6px 12px;
   background: #ffe9d6;
-  color: #a86b00;
+  color: ${props => props.theme['gray-800']};
+  font-weight: 600;
   border-radius: 12px;
   font-size: 12px;
 
@@ -97,13 +98,16 @@ export const IconButton = styled.button<IconButtonProps>`
     color: ${props =>
       props.variant === 'danger'
         ? props.theme['red-600']
-        : props.theme['gray-600']};
+        : props.theme['gray-500']};
   }
 
   &:hover svg {
-    color: ${props => props.theme['gray-900']};
-    background-color: ${props => props.theme['gray-200']};
+    color: ${props =>
+      props.variant === 'danger'
+        ? props.theme['red-700']
+        : props.theme['gray-900']};
   }
+
 
   @media (max-width: 480px) {
     svg {

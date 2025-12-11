@@ -29,12 +29,12 @@ export const StyledInput = styled.input<StyledInputProps>`
     outline: none;
 
     border-color: ${({ hasError, theme }) =>
-      hasError ? theme['red-500'] : theme['blue-500']};
+      hasError ? theme['red-500'] : theme['gray-500']};
 
     box-shadow: ${({ hasError, theme }) =>
       hasError
         ? `0 0 0 1px ${theme['red-500']}`
-        : `0 0 0 1px ${theme['blue-100']}`};
+        : `0 0 0 1px ${theme['gray-100']}`};
   }
 
   @media (min-width: 48rem) {

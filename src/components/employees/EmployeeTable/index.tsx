@@ -8,6 +8,8 @@ interface EmployeeTableProps {
   filteredEmployees: EmployeeData[];
 }
 
+// quero um hook para somar a quantidade total de irrf retido de uma lista de funcionários
+
 export default function EmployeeTable({ filteredEmployees }: EmployeeTableProps) {
   const { deleteEmployee } = useEmployee();
 

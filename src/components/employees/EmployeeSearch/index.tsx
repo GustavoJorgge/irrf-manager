@@ -1,5 +1,5 @@
 import { MagnifyingGlass } from '@phosphor-icons/react';
-import { SearchContainer, SearchInput } from './styles';
+import { SearchContainer, SearchIcon, SearchInput } from './styles';
 
 interface EmployeeSearchProps {
   onSearch: (query: string) => void;
@@ -8,7 +8,9 @@ interface EmployeeSearchProps {
 export function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
   return (
     <SearchContainer>
-      <MagnifyingGlass size={20} color="#9CA3AF" />
+      <SearchIcon>
+        <MagnifyingGlass size={18} weight="regular" />
+      </SearchIcon>
       <SearchInput 
         type="text" 
         placeholder="Buscar por nome ou CPF..." 
