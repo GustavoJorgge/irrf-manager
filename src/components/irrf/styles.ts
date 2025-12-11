@@ -54,9 +54,11 @@ export const Table = styled.table`
 
 export const TableHead = styled.thead`
     background-color: ${props => props.theme['gray-50']};
+    
 `;
 
-export const TableBody = styled.tbody``;
+export const TableBody = styled.tbody`
+`;
 
 export const TableRow = styled.tr`
     border-bottom: 1px solid ${props => props.theme['gray-200']};
@@ -90,7 +92,9 @@ export const TableCell = styled.td`
     color: ${props => props.theme['black']};
     vertical-align: top;
 
-    word-break: break-word;
+    &:nth-child(2) {
+        font-weight: bold;
+    }
 
     @media (max-width: 480px) {
         padding: 0.45rem;
